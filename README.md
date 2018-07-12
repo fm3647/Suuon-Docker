@@ -1,6 +1,8 @@
 # Suuon-Docker
 
 Suuon-Docker는 Docker로 셋팅 한 PHP운영개발 환경입니다.(LNMP)
+* Wordpress, Drupal, XE 등 cms를 설치할 수 있습니다.
+* php7.2.7, nginx:latest, mariadb:latest
 
 ## 준비
 
