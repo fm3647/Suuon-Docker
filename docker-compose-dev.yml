@@ -1,36 +1,46 @@
-version: '3.1'
+version: '3'
+
+# Services Settings
 services:
-  nginx:
+
+  # 웹서비스
+  web:
     image: nginx:latest
     restart: always
     ports:
       - "8000:80"
-      - "8443:443"
+      - "443:443"
     depends_on:
       - php
     volumes:
       - ./suuon/www:/icedata/suuon/www
       - ./services/nginx/config:/etc/nginx/conf.d
     container_name: nginx
+
+  # PHP 7.2.7버전 설치
   php:
-    image: php-fpm:latest
+    # image: php:7.2.7-fpm
+    build: ./services/php
     restart: always
     volumes:
       - ./suuon/www:/icedata/suuon/www
     container_name: php
-  mariadb:
+
+  # Database: mariadb
+  db:
     image: mariadb:latest
     restart: always
     ports:
-      - "3326:3306"
+      - "3336:3306"
     environment:
-      MYSQL_ROOT_PASSWORD: "root"
+      MYSQL_ROOT_PASSWORD: "P4ssw0rd!"
       MYSQL_DATABASE: "suuon_db"
       MYSQL_USER: "suuon"
       MYSQL_PASSWORD: "suuon"
     volumes:
       - ./suuon/database:/var/lib/mysql
     container_name: mariadb
+
   phpmyadmin:
     image: phpmyadmin/phpmyadmin
     restart: always
@@ -38,5 +48,6 @@ services:
       - "8001:80"
     environment:
       PMA_HOST: "db"
-      PMA_USER: "app"
-      PMA_PASSWORD: "123123"
+      PMA_USER: "suuon"
+      PMA_PASSWORD: "suuon"
+    container_name: phpmyadmin

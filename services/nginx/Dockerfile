@@ -1,4 +1,4 @@
-FROM centos:7.5
+FROM centos:7.5.1804
 MAINTAINER suuon <i@suuon.com>
 
 # 필수도구 설치
@@ -8,11 +8,11 @@ RUN yum install wget curl perl gcc pcre-devel zlib-devel make -y
 WORKDIR /usr/local/src
 
 #  openssl 다운로드
-RUN curl -L --progress https://www.openssl.org/source/openssl-1.0.2-latest.tar.gz | tar xz
+RUN curl -L --progress https://www.openssl.org/source/openssl-1.1.1-pre8.tar.gz | tar xz
 RUN mv openssl*/ openssl/
 
 # Nginx 다운로드
-RUN curl -L --progress http://nginx.org/download/nginx-1.11.10.tar.gz | tar xz
+RUN curl -L --progress http://nginx.org/download/nginx-1.15.1.tar.gz | tar xz
 RUN mv nginx*/ nginx/
 
 # Nginx 설정

@@ -1,4 +1,4 @@
-FROM php:7.2.7
+FROM php:7.2.7-fpm
 MAINTAINER Suuon <i@suuon.com>
 
 WORKDIR /icedata/suuon
@@ -36,7 +36,7 @@ ENV LANGUAGE ko_KR.UTF-8
 # composer 설치 및 설정
 # Composer 설치 https://getcomposer.org/download/
 # composer 다운로드 느릴 시，하단주석 삭제하여 활성화.
-COPY ./files/composer-1.6.5.phar /usr/local/bin/composer
+# COPY ./files/composer-1.6.5.phar /usr/local/bin/composer
 RUN chmod +x /usr/local/bin/composer
 RUN echo 'export PATH="$PATH:$HOME/.composer/vendor/bin"' >> ~/.bashrc \
   && . ~/.bashrc \

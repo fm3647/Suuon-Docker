@@ -56,5 +56,5 @@ node_modules/
 bower_components/
 
 # Project #
-app/database/
+suuon/database/
 .env

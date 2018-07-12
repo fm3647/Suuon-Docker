@@ -8,12 +8,13 @@ RUN mkdir -p /usr/src/php/ext/redis \
     && echo 'redis' >> /usr/src/php-available-exts \
     && docker-php-ext-install redis
 
-RUN apt-get update && apt-get install -y libpng12-dev libjpeg-dev \
-  && rm -rf /var/lib/apt/lists/* \
-  && pecl install zip \
-  && docker-php-ext-enable zip \
-  && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
-  && docker-php-ext-install gd mysqli pdo_mysql zip opcache redis bcmath
+# 잠시 숨김: 확장설치 최신버전 버그.
+RUN apt-get update && apt-get install -y libpng-dev libjpeg-dev \
+    && rm -rf /var/lib/apt/lists/* \
+    # && pecl install zip \
+    # && docker-php-ext-enable zip \
+    && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
+    && docker-php-ext-install gd mysqli pdo_mysql zip opcache redis bcmath
 
 COPY ./config/php.ini /usr/local/etc/php/conf.d/
 COPY ./config/opcache-recommended.ini /usr/local/etc/php/conf.d/
